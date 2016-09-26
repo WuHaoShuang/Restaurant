@@ -1,0 +1,167 @@
+
+
+<form id="edit_dish">
+    <input type="hidden" name="id" value="" id="id">
+    <p>
+        <select class="small-input class" id="select_class">
+            <option value="">请选择菜品分类</option>
+        </select>
+    </p>
+    <p>
+        <select class="small-input" id="select_dish">
+            <option value="">请选择菜品</option>
+        </select>
+    </p>
+    <p>
+        <label>菜品名称</label>
+        <input class="text-input small-input" type="text"  name="name" id="name">
+        <!-- Classes for input-notification: success, error, information, attention -->
+        <br> </p>
+    <p>
+    <p>
+        <label>菜品价格</label>
+        <input class="text-input small-input" type="text"  name="price" id="price">
+        <!-- Classes for input-notification: success, error, information, attention -->
+        <br>
+    <p>
+        <select name="classname" class="small-input class" id="class_sel" >
+            <option value="">请选择菜品分类</option>
+        </select>
+    </p>
+    <p id="pic">
+        <label>菜品展示图片</label>
+        <input type="file" id="pictureAjax" name="img"/>
+        <img id="picImg" src="" /><br>
+    </p>
+<input class="button" type="submit" value="修改菜品"/>
+<input class="button" type="button" value="删除菜品" id="del_btn" />
+</form>
+<script>
+    $.ajax
+    ({
+        type: 'post',
+        url: "/Restaurant/classify/findbyrest",
+        dataType: 'json',
+        success: function (data)
+        {
+            console.log(data);
+            for (var o in data)
+            {
+                var option = c$("option");
+                $(option).val(data[o].name);
+                $(option).text(data[o].name);
+                $(".small-input.class").append(option);
+            }
+        }
+    })
+    $("#select_class").change(function(){
+        var classname = $(this).val();
+        $.ajax
+        ({
+            data:{"classname":classname},
+            type: 'post',
+            url: "/Restaurant/dish/findbyclass",
+            dataType: 'json',
+            success: function (data)
+            {
+                console.log(data);
+                $("#select_dish").html("<option value=\"\">请选择菜品</option>");
+                for (var o in data)
+                {
+                    var option = c$("option");
+                    $(option).val(data[o].id);
+                    $(option).text(data[o].name);
+                    $("#select_dish").append(option);
+                }
+            }
+        })
+    })
+    $("#select_dish").change(function(){
+        var id = $(this).val();
+        $.ajax
+        ({
+            data:{"id":id},
+            type: 'post',
+            url: "/Restaurant/dish/findbyid",
+            dataType: 'json',
+            success: function (data)
+            {
+                console.log(data);
+                for (var o in data)
+                {
+
+                    $("#id").val(data[o].id);
+                    $("#name").val(data[o].name);
+                    $("#class_sel").val(data[o].classname);
+                    $("#price").val(data[o].price);
+                    $("#picImg").attr({ "src": data[o].img, "style": "height:140px;width:200px" });
+                }
+            }
+        })
+    })
+    var filename = "";
+    var picString = "";
+    $("#pictureAjax").change(function (e) {
+        var file = e.delegateTarget.files[0];
+        filename = file.name;
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (ret) {
+            picString = reader.result
+            //预览图片
+            $("#picImg").attr({ "src": picString, "style": "height:140px;width:200px" });
+        }
+    });
+
+    $("#edit_dish").validate(
+            {
+                /*表单验证通过后执行的方法*/
+                submitHandler: function (form) {
+                    // do other stuff for a valid form
+                    var params = $("#edit_dish").serialize();
+                    params += "&&file=" + picString + "&&filename=" + filename;
+                    var url = '/Restaurant/dish/editdish';
+                    jQuery.ajax({
+                        type: 'post',
+                        url: url,
+                        data: params,
+                        dataType: 'text',
+                        success: function (data) {
+                            layer.alert(data);
+                        }
+                    })
+                },
+                /*验证方式*/
+                rules: {
+                    name: {
+                        maxlength:20,
+                        required: true,
+                    },price: {
+                        number:true,
+                        range:[0,1000],
+                        required: true,
+                    },classname: {
+                        required: true,
+                    }
+                }, onfocusout: false,
+                ignore: ""
+            }
+    );
+    $("#del_btn").click(function(){
+        layer.confirm('确定要删除'+jQuery("#select_dish  option:selected").text(), {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            jQuery.ajax({
+                type: 'post',
+                url:  '/Restaurant/dish/delete',
+                data: {"id":$("#select_dish").val()},
+                dataType: 'text',
+                success: function (data) {
+                    layer.alert(data);
+                }
+            });
+        }, function(){
+
+        });
+    });
+</script>

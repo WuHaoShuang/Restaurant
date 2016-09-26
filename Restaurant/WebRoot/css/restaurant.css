@@ -1,0 +1,227 @@
+.left
+{
+    width: 30vw;
+    height: 80vh;
+    float: left;
+    border-right: 2px solid black;
+    position: fixed;
+    overflow-y:scroll;
+}
+.right
+{
+    width: 63vw;
+    height: 100vh;
+    float: right;
+    display: none;
+}
+.classify
+{
+    width: 30vw;
+    height: 10vh;
+    background:white;
+    border-bottom: 4px solid black;
+    border-radius: 20px;
+    text-align:center;
+    line-height:10vh;
+}
+.spinner{
+    margin-top: 7vh;
+}
+.add{
+    background-image: url(../img/add.png);
+    background-size: contain;
+    width: 4vh;
+    height: 4vh;
+    display:inline-block;
+    float: right;
+}
+.reduce{
+    background-image: url(../img/reduce.png);
+    background-size: contain;
+    width: 4vh;
+    height: 4vh;
+    display:inline-block;
+    float: right;
+}
+.dish_num{
+    width: 1em;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    float: right;
+}
+.dish_name{
+    margin-top: 1vw;
+    padding-left: 5vw;
+    display: inline-block;
+    min-width:4em;
+}
+.cart{
+    width: 30vw;
+    height: 10vh;
+    background:white;
+    border-bottom: 4px solid black;
+    position: fixed;
+    margin-top: 90vh;
+    float: left;
+    border-right: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 10vh;
+}
+.dish_li{
+    width: 60vw;
+    padding-left: 2vw;
+    height: 18vh;
+    padding-bottom: 2vw;
+    display: inline-block;
+}
+.dish_img{
+    float: left;
+    width: 20vw;
+    height: 20vw;
+    padding-bottom: 2vw;
+    border-bottom: 2px solid black;
+}
+.dish_information{
+    float: right;
+    display: inline-block;
+}
+.dish_price{
+    display: inline-block;
+    float: right;
+    padding-top: 1vw;
+}
+.add_page{
+    width: 30vw;
+    height: 10vh;
+    background:white;
+    border-bottom: 4px solid black;
+    position: fixed;
+    margin-top: 80vh;
+    float: left;
+    border-right: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 10vh;
+}
+.kitchen_img
+{
+    float: left;
+    width: 24vw;
+    height: 30vw;
+    padding-bottom: 2vw;
+    border-bottom: 2px solid black;
+
+}
+.kitchen_num
+{
+    width: 1em;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    float: right;
+}
+.kitchen_li{
+    width: 60vw;
+    height: 22vh;
+    position: relative;
+    display: inline-block;
+    margin-top: 2vh;
+}
+.already_strong{
+    font-size: larger;
+    color: red;
+    text-align: center;
+}
+.kitchen_confirm {
+    background-color:#dbe6c4;
+    -moz-border-radius:42px;
+    -webkit-border-radius:42px;
+    border-radius:42px;
+    border:1px solid #b2b8ad;
+    display:inline-block;
+    cursor:pointer;
+    color:#757d6f;
+    font-family:Arial;
+    font-size:17px;
+    padding:4px 15px;
+    text-decoration:none;
+    text-shadow:2px -1px 0px #ced9bf;
+    float: right;
+}
+.kitchen_confirm:hover {
+    background-color:#9ba892;
+}
+.kitchen_confirm:active {
+    position:relative;
+    top:1px;
+}
+.cart_check{
+    background-color:#dbe6c4;
+    -moz-border-radius:42px;
+    -webkit-border-radius:42px;
+    border-radius:42px;
+    border:1px solid #b2b8ad;
+    display:inline-block;
+    cursor:pointer;
+    color:#757d6f;
+    font-family:Arial;
+    font-size:17px;
+    padding:4px 15px;
+    text-decoration:none;
+    text-shadow:2px -1px 0px #ced9bf;
+    float: right;
+}
+.cart_check:hover {
+    background-color:#9ba892;
+}
+.cart_check:active {
+    position:relative;
+    top:1px;
+}
+.kitchen_name{
+    min-width:4em ;
+    display: inline-block;
+    float: right;
+}
+.end_btn{
+    background-color:#dbe6c4;
+    -moz-border-radius:42px;
+    -webkit-border-radius:42px;
+    border-radius:42px;
+    border:1px solid #b2b8ad;
+    display:inline-block;
+    cursor:pointer;
+    color:#757d6f;
+    font-family:Arial;
+    font-size:17px;
+    padding:4px 15px;
+    text-decoration:none;
+    text-shadow:2px -1px 0px #ced9bf;
+}
+.end_btn:hover {
+    background-color:#9ba892;
+}
+.end_btn:active {
+    position:relative;
+    top:1px;
+}
+.redpoint{
+    display:inline-block;
+    height:4vh;
+    width:4vh;
+    line-height:16px;
+    text-align:center;
+    font-size:1.2em;
+    border-radius:16px;
+    color:black;
+    background:red;
+    position: relative;
+    top: -3vh;
+    right: -5vh;
+}
+.classify_1
+{
+    background:yellow;
+}

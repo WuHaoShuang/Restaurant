@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/restaurant?useUnicode=true&amp;characterEncoding=utf8</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="hibernate.show_sql">true</property>
+         <property name="format_sql">true</property>
+        <!--  <property name="current_session_context_class">thread</property> -->
+        <mapping class="hct.restaurant.vo.Dish"/>
+        <mapping class="hct.restaurant.vo.Bill"/>
+        <mapping class="hct.restaurant.vo.Table"/>
+        <mapping class="hct.restaurant.vo.Classify"/>
+        <mapping class="hct.restaurant.vo.Restaurant"/>
+         <mapping class="hct.restaurant.vo.Product"/>
+          <mapping class="hct.restaurant.vo.Storage"/>
+    </session-factory>
+</hibernate-configuration>

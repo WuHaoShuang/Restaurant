@@ -1,0 +1,119 @@
+<table>
+    <thead>
+    <tr>
+        <th>产品名称</th>
+        <th>入库时间</th>
+        <th>入库数量</th>
+        <th>入库单价</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <td colspan="6">
+            <div class="bulk-actions align-left">
+                <select name="productid" id="productid">
+                    <option value="">请选择产品</option>
+                </select>
+                <p><label>输入开始日期：</label><input class="Wdate" type="text" readonly="readonly" name="starttime" onfocus="WdatePicker()"></p>
+                <p><label>输入结束日期：</label><input class="Wdate" type="text" readonly="readonly" name="endtime" onfocus="WdatePicker()"></p>
+                <a class="button" href="#" onclick="select()">查询</a>
+            </div>
+            <div class="pagination">
+                <select name="pagenum" id="pagenum">
+                </select>
+                <div class="clear"></div>
+        </td>
+    </tr>
+    </tfoot>
+    <tbody id="tbody">
+    </tbody>
+</table>
+<script>
+    var json_data ;
+    $.ajax
+    ({
+        type: 'post',
+        url: "/Restaurant/product/selectall",
+        dataType: 'json',
+        success: function (data)
+        {
+            for(var o in data)
+            {
+                $("#productid").append("<option value=\""+data[o].id+"\">"+data[o].name+"</option>")
+                select();
+            }
+        }
+    })
+    function select()
+    {
+        var starttime = $("#starttime").val();
+        var endtime = $("#endtime").val();
+        var productid = $("productid").val();
+        $.ajax
+        ({
+            data:{"starttime":starttime,"endtime":endtime,"productid":productid},
+            type: 'post',
+            url: "/Restaurant/product/selectstorage",
+            dataType: 'json',
+            success: function (data)
+            {
+                json_data = data;
+                initpage();
+                console.log(data);
+            }
+        })
+    }
+
+    function initpage()
+    {
+        $("#pagenum").html("");
+        var size  = Math.ceil(json_data.length / 5);
+        for (var i = 0 ; i <size ;i++)
+        {
+            var option = c$("option");
+            $(option).val(i+1);
+            $(option).text((i+1)+"/"+size);
+            $("#pagenum").append($(option));
+        }
+        $("#pagenum").change(function(){
+            showtable($(this).val());
+        })
+        showtable(1);
+    }
+    function  showtable(j)
+    {
+        page = i;
+        var length = json_data.length;
+        var num = length-5*(j-1)
+        if (num>5)
+        {
+            num = 5*j;
+        }
+        else num = length;
+        console.log(num)
+        $("#tbody").html("");
+        for (var i= 5*(j-1);i<num;i++)
+        {
+            console.log(json_data[i])
+            var tr = c$("tr");
+            if(i%2==0)
+            {
+                $(tr).addClass("alt-row");
+            }
+            var time = c$("td");
+            var name = c$("td");
+            var num = c$("td")
+            var price = c$("td");
+            console.log()
+            $(name).text($("#productid option[value="+json_data[i].productid+"]").text())
+            $(time).text(json_data[i].time);
+            $(num).text(json_data[i].num)
+            $(price).text(json_data[i].price);
+            $(tr).append($(name))
+            $(tr).append($(time))
+            $(tr).append($(num))
+            $(tr).append($(price))
+            $(tr).appendTo($("#tbody"));
+        }
+    }
+</script>

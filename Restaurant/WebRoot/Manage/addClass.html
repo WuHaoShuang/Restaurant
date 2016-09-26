@@ -1,0 +1,52 @@
+<form id="add_class">
+<p>
+    <label>分类名称</label>
+    <input class="text-input small-input" type="text" id="class_name" name="class_name">
+    <!-- Classes for input-notification: success, error, information, attention -->
+    <br>
+</p>
+<input class="button" type="submit" value="添加分类"/>
+    </form>
+<script>
+    $("#add_class").validate(
+            {
+                /*表单验证通过后执行的方法*/
+                submitHandler: function (form) {
+                    // do other stuff for a valid form
+                    var classname = $("#class_name").val();
+                    $.ajax
+                    ({
+                        data:{"name":classname},
+                        type: 'post',
+                        url: "/Restaurant/classify/add",
+                        dataType: 'json',
+                        success: function (data)
+                        {
+                            layer.alert(data);
+                        }
+                    })
+                },
+                /*验证方式*/
+                rules: {
+                    class_name: {
+                        required: true,
+                        maxlength:10,
+                    }
+
+
+                },
+                messages: {
+                    class_name: {
+                        required: "分类名称不能为空"
+                    }
+                }, showErrors: function (errorMap, errorList) {
+                var msg = "";
+                $.each(errorList, function (i, v) {
+                    msg += (v.message + "\r\n");
+                });
+                if (msg != "") layer.alert(msg);
+            }, onfocusout: false,
+                ignore: ""
+            }
+    );
+</script>

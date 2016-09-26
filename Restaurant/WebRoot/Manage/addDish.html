@@ -1,0 +1,93 @@
+<form id="adddish_form">
+<p>
+    <label>菜品名称</label>
+    <input class="text-input small-input" type="text"  name="name">
+    <!-- Classes for input-notification: success, error, information, attention -->
+    <br> </p>
+    <p>
+    <p>
+        <label>菜品价格</label>
+        <input class="text-input small-input" type="text"  name="price">
+        <!-- Classes for input-notification: success, error, information, attention -->
+        <br>
+    <p>
+        <select name="classname" class="small-input" id="class_sel" >
+            <option value="">请选择菜品分类</option>
+        </select>
+    </p>
+    <p id="pic">
+        <label>菜品展示图片</label>
+        <input type="file" id="pictureAjax" name="img"/>
+        <img id="picImg" src="" /><br>
+    </p>
+<input class="button" type="submit" value="添加菜品"/>
+</form>
+<script>
+    var filename = "";
+    var picString = "";
+    $("#pictureAjax").change(function (e) {
+        var file = e.delegateTarget.files[0];
+        filename = file.name;
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (ret) {
+            picString = reader.result
+            //预览图片
+            $("#picImg").attr({ "src": picString, "style": "height:140px;width:200px" });
+        }
+    });
+    $.ajax
+    ({
+        type: 'post',
+        url: "/Restaurant/classify/findbyrest",
+        dataType: 'json',
+        success: function (data)
+        {
+        console.log(data);
+            for (var o in data)
+            {
+                var option = c$("option");
+                $(option).val(data[o].name);
+                $(option).text(data[o].name);
+                $("#class_sel").append(option);
+            }
+        }
+    })
+    $("#adddish_form").validate(
+            {
+                /*表单验证通过后执行的方法*/
+                submitHandler: function (form) {
+                    // do other stuff for a valid form
+                    var params = $("#adddish_form").serialize();
+                    params += "&&file=" + picString + "&&filename=" + filename;
+                    var url = '/Restaurant/dish/adddish';
+                    jQuery.ajax({
+                        type: 'post',
+                        url: url,
+                        data: params,
+                        dataType: 'text',
+                        success: function (data) {
+                            layer.alert(data);
+                        }
+                    })
+                },
+                /*验证方式*/
+                rules: {
+                    name: {
+                        maxlength:20,
+                        required: true,
+                    },price: {
+                        number:true,
+                        range:[0,1000],
+                        required: true,
+                    },classname: {
+                        required: true,
+                    },img:{
+                        required: true,
+                        checkPic:true,
+                    }
+                }, onfocusout: false,
+                ignore: ""
+            }
+    );
+</script>

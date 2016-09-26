@@ -1,0 +1,40 @@
+<form>
+<p>
+<select name="tableid" class="small-input" id="tableid">
+    <option value="">请选择桌号</option>
+</select>
+</p>
+<input class="button" type="button" value="删除餐桌" id="del_btn" />
+</form>
+<script>
+    $.ajax
+    ({
+        type: 'post',
+        url: "/Restaurant/alltable",
+        dataType: 'json',
+        success: function (data)
+        {
+            for(var o in data)
+            {
+                $("#tableid").append("<option value=\""+data[o].id+"\">"+data[o].seatnum+"</option>")
+            }
+        }
+    })
+    $("#del_btn").click(function(){
+        layer.confirm('确定要删除'+jQuery("#tableid  option:selected").text(), {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            jQuery.ajax({
+                type: 'post',
+                url:  '/Restaurant/table/delete',
+                data: {"id":$("#tableid").val()},
+                dataType: 'text',
+                success: function (data) {
+                    layer.alert(data);
+                }
+            });
+        }, function(){
+
+        });
+    });
+</script>

@@ -1,0 +1,30 @@
+<select name="tableid" id="tableid">
+    <option value="">请选择桌号</option>
+</select>
+<div id="qrcode"></div>
+<script>
+    $.ajax
+    ({
+        type: 'post',
+        url: "/Restaurant/alltable",
+        dataType: 'json',
+        success: function (data)
+        {
+            for(var o in data)
+            {
+                $("#tableid").append("<option value=\""+data[o].id+"\">"+data[o].seatnum+"</option>")
+                select();
+            }
+        }
+    })
+    $("#tableid").bind("change",function(){
+        var host = document.domain;
+        var id = $("#tableid").val();
+        if (id!="")
+        {
+            $('#qrcode').html("<br>");
+            $('#qrcode').qrcode(host+"/Restaurant/route?id="+id);
+        }
+      else  $('#qrcode').html("");
+    });
+</script>
