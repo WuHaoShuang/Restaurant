@@ -23,8 +23,8 @@ public class ClassifyAction implements ModelDriven<Classify> {
 	private Classify classify = new Classify();
 	@Autowired
 	private ClassifyService cs;
-	private String message;
-	private ArrayList<Classify> list;
+	private String message = "";
+	private ArrayList<Classify> list = new ArrayList<Classify>();
 
 	@JSON
 	public String getMessage() {

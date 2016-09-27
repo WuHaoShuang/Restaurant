@@ -24,12 +24,12 @@ public class ProductAction implements ModelDriven<Storage> {
 	private Storage s = new Storage();
 	@Autowired
 	private ProductService ps;
-	private String message;
-	private String name;
-	private ArrayList<Product> plist ;
-	private String starttime ;
-	private String endtime ;
-	private ArrayList<Storage> slist ;
+	private String message = "";
+	private String name = "";
+	private ArrayList<Product> plist = new ArrayList<Product>();
+	private String starttime = "" ;
+	private String endtime = "";
+	private ArrayList<Storage> slist  = new ArrayList<Storage>();
 	@JSON
 	public ArrayList<Storage> getSlist() {
 		return slist;

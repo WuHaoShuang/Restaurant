@@ -31,11 +31,11 @@ public class DishAction implements ModelDriven<Dish> {
 	@Autowired
 	private DishService ds ;
 	private Dish dish = new Dish();
-	private ArrayList<Dish> list ;
-	private String tableId ;
-	private String message ;
-	private String filename ;
-	private String file ;
+	private ArrayList<Dish> list  = new ArrayList<Dish>();
+	private String tableId = "";
+	private String message = "";
+	private String filename = "";
+	private String file = "";
 	public String getFilename() {
 		return filename;
 	}

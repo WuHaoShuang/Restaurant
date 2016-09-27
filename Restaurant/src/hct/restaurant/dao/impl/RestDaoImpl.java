@@ -52,10 +52,6 @@ public class RestDaoImpl implements RestDao {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		finally
-		{
-			session.close();
-		}
 		return list;
 	}
 	public void update(Restaurant r) 
@@ -67,10 +63,6 @@ public class RestDaoImpl implements RestDao {
 			session.beginTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-		finally
-		{
-		    session.close();
 		}
 		
 	}

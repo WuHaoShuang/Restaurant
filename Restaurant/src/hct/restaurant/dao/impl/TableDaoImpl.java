@@ -27,9 +27,6 @@ public class TableDaoImpl implements TableDao {
 			// TODO: handle exception
 			System.err.println(e);
 		}
-		finally{
-			session.close();
-		}
 		return id ;
 	}
 
@@ -43,10 +40,6 @@ public class TableDaoImpl implements TableDao {
 			// TODO: handle exception
 			System.err.println(e);
 			return "error";
-		}
-		finally{
-			session.close();
-			
 		}
 		return "success";
 	}
@@ -77,10 +70,6 @@ public class TableDaoImpl implements TableDao {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		finally
-		{
-			session.close();
-		}
 		return list;
 	}
 
@@ -92,10 +81,6 @@ public class TableDaoImpl implements TableDao {
 			session.beginTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-		finally
-		{
-		    session.close();
 		}
 		
 	}

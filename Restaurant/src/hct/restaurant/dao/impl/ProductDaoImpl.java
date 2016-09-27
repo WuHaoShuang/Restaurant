@@ -27,9 +27,6 @@ public class ProductDaoImpl implements ProductDao{
 			// TODO: handle exception
 			System.err.println(e);
 		}
-		finally{
-			session.close();
-		}
 		return id ;
 	}
 
@@ -73,7 +70,6 @@ public class ProductDaoImpl implements ProductDao{
 
 	public void update(Product p) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

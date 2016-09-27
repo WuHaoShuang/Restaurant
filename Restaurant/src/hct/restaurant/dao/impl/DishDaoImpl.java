@@ -32,9 +32,6 @@ public class DishDaoImpl implements DishDao {
 			// TODO: handle exception
 			System.err.println(e);
 		}
-		finally{
-			session.close();
-		}
 		return id ;
 	}
 
@@ -48,10 +45,6 @@ public class DishDaoImpl implements DishDao {
 			// TODO: handle exception
 			System.err.println(e);
 			return "error";
-		}
-		finally{
-			session.close();
-			
 		}
 		return "success";
 	}
@@ -82,10 +75,6 @@ public class DishDaoImpl implements DishDao {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		finally
-		{
-			session.close();
-		}
 		return list;
 	}
 
@@ -97,10 +86,6 @@ public class DishDaoImpl implements DishDao {
 			session.beginTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-		finally
-		{
-		    session.close();
 		}
 		
 	}

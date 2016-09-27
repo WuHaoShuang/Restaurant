@@ -26,9 +26,6 @@ public class BillDaoImpl implements BillDao {
 			// TODO: handle exception
 			System.err.println(e);
 		}
-		finally{
-			session.close();
-		}
 	}
 
 	public String delete(Bill b) {
@@ -43,7 +40,6 @@ public class BillDaoImpl implements BillDao {
 		session = sessionFactory.openSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Bill where 1=1");
-		//循环添加查询条件
 		Iterator it = map.keySet().iterator();
 		while(it.hasNext()){
 		String key = (String) it.next();
@@ -55,7 +51,7 @@ public class BillDaoImpl implements BillDao {
 			else if(key.equals("endtime"))
 			sb.append("and time < '"+value+"' ");
 			else 
-			sb.append("and "+key+" ='"+value+"' ");
+			sb.append("and "+key+" like '%"+value+"%' ");
 		}
 		}
 		try
@@ -66,10 +62,6 @@ public class BillDaoImpl implements BillDao {
 		{
 			// TODO: handle exception
 			e.printStackTrace();
-		}
-		finally
-		{
-			session.close();
 		}
 		return list;
 	}

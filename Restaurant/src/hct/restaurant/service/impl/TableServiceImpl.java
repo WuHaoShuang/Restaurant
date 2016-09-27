@@ -1,15 +1,20 @@
 package hct.restaurant.service.impl;
 
+import hct.restaurant.dao.DishDao;
 import hct.restaurant.dao.TableDao;
 import hct.restaurant.service.TableService;
 import hct.restaurant.vo.Table;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import antlr.collections.List;
 
 import com.alibaba.fastjson.JSON;
 import com.uwantsoft.goeasy.client.goeasyclient.GoEasy;
@@ -17,6 +22,8 @@ import com.uwantsoft.goeasy.client.goeasyclient.GoEasy;
 public class TableServiceImpl implements TableService {
 @Autowired
 private TableDao dao;
+@Autowired
+private DishDao ddao ;
 	@SuppressWarnings("unchecked")
 	public void addCart(Table table) {
 		// TODO Auto-generated method stub
@@ -123,10 +130,47 @@ private TableDao dao;
 	}
 	public String addTable(Table table) {
 		// TODO Auto-generated method stub
+		table.setAlready("{}");
+		table.setCart("{}");
 		return dao.add(table);
 	}
 	public void deleteTable(Table table) {
 		// TODO Auto-generated method stub
 		dao.delete(table);
+	}
+	public ArrayList<Table> getNowBill(String restname) 
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("restname", restname);
+		ArrayList<Table> list = new ArrayList<Table>();
+		ArrayList<Table> list2 = dao.select(map);
+		Iterator it = list2.iterator();
+		while(it.hasNext()){
+		   Table t = (Table) it.next();
+		   t.setAlready(getContent(t));
+		   list.add(t);
+		}
+		return list;
+	}
+	@SuppressWarnings("unchecked")
+	public String getContent(Table t)
+	{
+		 
+		 Map<String, Integer> map =  (Map<String,Integer>) JSON.parse(t.getAlready());	
+		 Map<String, Map<String, String>> map1 =  new HashMap<String, Map<String,String>>();
+		    for (Map.Entry entry : map.entrySet()) 
+		    {
+		        String key = entry.getKey().toString();
+		        Map<String,String> query = new HashMap<String, String>();
+		        query.put("restname", t.getRestname());
+		        query.put("name", key);
+		        DecimalFormat df = new DecimalFormat("0.00");
+		        float f = ddao.select(query).get(0).getPrice();  
+		        Map<String, String> map2 = new HashMap<String, String>();
+		        map2.put("num", entry.getValue().toString());
+		        map2.put("price", df.format(f));
+		        map1.put(key, map2);
+		     }
+		    return JSON.toJSONString(map1);
 	}
 }

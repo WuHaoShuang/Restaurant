@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class UserAction implements ModelDriven<Restaurant>{
 	@Autowired
 	private UserService us ;
-	private String message ;
+	private String message  = "";
 public String getMessage() {
 		return message;
 	}

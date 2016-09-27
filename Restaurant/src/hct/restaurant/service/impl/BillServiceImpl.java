@@ -13,12 +13,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 @Service
 public class BillServiceImpl implements BillService {
 @Autowired
@@ -106,6 +108,52 @@ private TableDao tdao ;
 		map.put("tableid", tableid);
 		map.put("restname", restname);
 		return dao.select(map);
+	}
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, Integer> selectSales(String name, String starttime,
+			String endtime, String restname) {
+		// TODO Auto-generated method stub
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("starttime", starttime);
+		map.put("endtime", endtime);
+		map.put("content", name);
+		map.put("restname", restname);
+		ArrayList<Bill> list  = dao.select(map);
+		Iterator<Bill> iter = list.iterator();
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		while(iter.hasNext())
+		{
+			Bill bill = iter.next();
+			Map<String, Object> map1 = JSONObject.parseObject(bill.getContent(), Map.class);
+			 for (Map.Entry entry : map1.entrySet()) 
+			    {
+			        String key = entry.getKey().toString();
+			        Map<String, String> map2 = (Map<String, String>)map1.get(key);
+			        if (!name.equals("")) {
+			        	if(key.equals(name)){
+						if (result.containsKey(key)) {
+							int a = result.get(key)+Integer.parseInt(map2.get("num"));
+							result.put(key, a);
+						}
+						else {
+							result.put(key, Integer.parseInt(map2.get("num")));
+						}
+			        	}
+					}
+			        else {
+			        	if (result.containsKey(key)) {
+							int a = result.get(key)+Integer.parseInt(map2.get("num"));
+							result.put(key, a);
+						}
+						else {
+							result.put(key, Integer.parseInt(map2.get("num")));
+						}
+					}
+			        	
+			     }
+		}
+		return result;
 	}
 
 }

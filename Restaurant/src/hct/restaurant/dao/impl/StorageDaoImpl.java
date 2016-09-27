@@ -27,9 +27,6 @@ public class StorageDaoImpl implements StorageDao {
 			// TODO: handle exception
 			System.err.println(e);
 		}
-		finally{
-			session.close();
-		}
 		return id ;
 	}
 
@@ -68,10 +65,6 @@ public class StorageDaoImpl implements StorageDao {
 		{
 			// TODO: handle exception
 			e.printStackTrace();
-		}
-		finally
-		{
-			session.close();
 		}
 		return list;
 	}

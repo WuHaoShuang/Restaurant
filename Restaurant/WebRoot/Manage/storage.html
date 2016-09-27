@@ -1,22 +1,22 @@
 <form id="storage_form">
     <p>
-        <select name="productid" class="small-input" id="product" >
+        <select name="productid" class="small-input" id="product">
             <option value="">请选择要添加的产品</option>
         </select>
     </p>
     <p>
         <label>入库数量</label>
-        <input class="text-input small-input" type="text"  name="num">
+        <input class="text-input small-input" type="text" name="num">
         <!-- Classes for input-notification: success, error, information, attention -->
         <br>
     </p>
     <p>
     <p>
         <label>产品单价</label>
-        <input class="text-input small-input" type="text"  name="price">
+        <input class="text-input small-input" type="text" name="price">
         <!-- Classes for input-notification: success, error, information, attention -->
         <br>
-    <input class="button" type="submit" value="产品入库"/>
+        <input class="button" type="submit" value="产品入库"/>
 </form>
 <script>
     $.ajax
@@ -24,11 +24,9 @@
         type: 'post',
         url: "/Restaurant/product/selectall",
         dataType: 'json',
-        success: function (data)
-        {
-            console.log(data);
-            for (var o in data)
-            {
+        success: function (data) {
+
+            for (var o in data) {
                 var option = c$("option");
                 $(option).val(data[o].id);
                 $(option).text(data[o].name);
@@ -57,17 +55,17 @@
                 rules: {
                     productid: {
                         required: true,
-                    },price:{
-                        number:true,
-                        range:[0,100000],
+                    }, price: {
+                        number: true,
+                        range: [0, 100000],
                         required: true,
-                    },num: {
-                        number:true,
-                        range:[0,1000],
+                    }, num: {
+                        number: true,
+                        range: [0, 1000],
                         required: true,
-                    },img:{
+                    }, img: {
                         required: true,
-                        checkPic:true,
+                        checkPic: true,
                     }
                 }, onfocusout: false,
                 ignore: ""

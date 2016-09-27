@@ -2,9 +2,11 @@ package hct.restaurant.action;
 
 import hct.restaurant.service.BillService;
 import hct.restaurant.service.TableService;
+import hct.restaurant.service.impl.BillServiceImpl;
 import hct.restaurant.vo.Table;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import com.sun.net.httpserver.Authenticator.Success;
 
 @Controller
 @ParentPackage("json-default")
@@ -24,11 +27,11 @@ private Table table = new Table();
 private TableService ts ;
 @Autowired
 private BillService bs ;
-private ArrayList<Table> list ;
-private String dishname ;
-private int servenum ;  
-private String password ;
-private String name ;
+private ArrayList<Table> list = new ArrayList<Table>();
+private String dishname = "";
+private int servenum = 0;  
+private String password = "";
+private String name = "";
 public String getPassword() {
 	return password;
 }
@@ -86,9 +89,9 @@ public void setTotal(float total) {
 	{
 		if(bs.validate(table.getCart(), total, table.getRestname()))
 		{
-			table.setSeatnum(ActionContext.getContext().getSession().get("tableid").toString());
+			table.setId(ActionContext.getContext().getSession().get("tableid").toString());
 			ts.addCart(table);
-			message = "下单成功";			
+			message = "下单成功";
 		}
 		else {
 			message = "价格出错";
@@ -104,7 +107,7 @@ public void setTotal(float total) {
 	@Action(value="selectTable",results={@Result(name="success",type="json",params={"root","list"})})
 	public String selectTable()
 	{
-		list = ts.allTable(table.getRestname());
+		list = ts.selectTable(table.getId());
 		return "success";
 	}
 	@Action(value="serve",results={@Result(name="success",type="json",params={"root","message"})})
@@ -135,6 +138,13 @@ public void setTotal(float total) {
 	{
 		ts.deleteTable(table);
 		message = "删除成功";
+		return "success";
+	}
+	@SuppressWarnings("rawtypes")
+	@Action(value="nowbill",results={@Result(name="success",type="json",params={"root","list"})})
+	public String nowBill()
+	{
+		list = ts.getNowBill(table.getRestname());
 		return "success";
 	}
 }

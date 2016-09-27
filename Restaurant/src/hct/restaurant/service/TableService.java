@@ -15,4 +15,5 @@ public interface TableService
  public void end(String tableid);
  public String addTable (Table table);
  public void deleteTable (Table table);
+ public ArrayList<Table> getNowBill(String restname);
 }

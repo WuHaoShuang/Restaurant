@@ -39,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- Logo (221px wide) -->
         <a href="#"><img id="logo" src="resources/images/logo.png" alt="Simpla Admin logo" /></a>
         <!-- Sidebar Profile links -->
+            <input type="hidden" id="restname" value="<%=session.getAttribute("restname") %>"/>
         <div id="profile-links"> Hello,<%=session.getAttribute("restname") %>
         <br />
         <a href="#" title="View the Site">View the Site</a> | <a href="#" title="Sign Out" id="logout">Sign Out</a>
@@ -66,10 +67,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="#" data="editPassword.html">修改密码</a></li>
         </ul>
         </li>
-        <li> <a href="#" class="nav-top-item" data="storageSale.html"> 销售统计 </a>
+        <li> <a href="#" class="nav-top-item"> 销售统计 </a>
         <ul>
-        <li><a href="#" data="sale.html">账单查询</a></li>
-        <li><a href="#">产品销量查询</a></li>
+            <li><a href="#" data="nowbill.html">查看当前账单</a></li>
+        <li><a href="#" data="bill.html">账单查询</a></li>
+        <li><a href="#"  data="sale.html">产品销量查询</a></li>
+
         </ul>
         </li>
         <li> <a href="#" class="nav-top-item"> 产品入库 </a>
@@ -102,16 +105,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <h2>Welcome</h2>
         <p id="page-intro">What would you like to do?</p>
         <ul class="shortcut-buttons-set">
-        <li><a class="shortcut-button" href="#" data="addClass.html"><span> <img
+        <li><a class="shortcut-button" href="#" data="nowbill.html"><span> <img
         src="resources/images/icons/pencil_48.png" alt="icon"><br>
-        添加分类 </span></a></li>
+        查看当前菜单 </span></a></li>
         <li><a class="shortcut-button" href="#" data="addDish.html"><span> <img
         src="resources/images/icons/paper_content_pencil_48.png" alt="icon"><br>
         添加菜品 </span></a></li>
         <li><a class="shortcut-button" href="#" data="editDish.html"><span> <img
         src="resources/images/icons/image_add_48.png" alt="icon"><br>
         编辑菜品 </span></a></li>
-        <li><a class="shortcut-button" href="#" data="sale.html"><span> <img src="resources/images/icons/clock_48.png"
+        <li><a class="shortcut-button" href="#" data="bill.html"><span> <img src="resources/images/icons/clock_48.png"
         alt="icon"><br>
         查看账单</span></a></li>
         <li><a class="shortcut-button" href="#" data="storage.html" ><span> <img
