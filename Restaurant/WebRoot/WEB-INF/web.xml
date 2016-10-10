@@ -32,11 +32,11 @@
  <filter-mapping>
      <filter-name>LoginFilter</filter-name>
       <!--“/*”表示拦截所有的请求 -->
-      <url-pattern>*.jsp</url-pattern>
+      <url-pattern>/kitchen.jsp</url-pattern>
    </filter-mapping>
     <filter-mapping>
      <filter-name>LoginFilter</filter-name>
       <!--“/*”表示拦截所有的请求 -->
-      <url-pattern>*.action</url-pattern>
+      <url-pattern>/Manage/index.jsp</url-pattern>
    </filter-mapping>
 </web-app>

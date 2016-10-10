@@ -20,10 +20,10 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
-
 @Controller
 @Namespace("bill")
 @ParentPackage("json-default")
+
 public class BillAction implements ModelDriven<Bill> {
 	private Bill bill = new Bill();
 	@Autowired

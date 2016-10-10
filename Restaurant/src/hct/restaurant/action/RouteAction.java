@@ -22,12 +22,12 @@ private TableService ts ;
 		// TODO Auto-generated method stub
 		return table;
 	}
-	@Action(value="/route",results={@Result(name="dish",location="/dish.jsp",type="dispatcher"),@Result(name="cart",location="/cart.jsp",type="dispatcher")})
+	@Action(value="/route",results={@Result(name="dish",location="/dish.jsp",type="dispatcher"),
+			@Result(name="cart",location="/cart.jsp",type="dispatcher")})
 	public String route()
 	{
 		ActionContext.getContext().getSession().put("restname", table.getRestname());
 		ActionContext.getContext().getSession().put("tableid", table.getId());
-		ActionContext.getContext().getSession().put("login", "success");
 		if (ts.validateTable(table.getId())) 
 		{
 			ts.updateStruts(table.getId());

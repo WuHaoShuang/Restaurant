@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 	<context:annotation-config />
 
-	<!-- 扫描annotation类，过滤Service，Repository -->
+	<!-- 扫描annotation类，过滤Service，Repository,Controller -->
 	<context:component-scan base-package="hct.restaurant">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
