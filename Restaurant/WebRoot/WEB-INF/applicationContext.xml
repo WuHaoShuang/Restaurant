@@ -13,39 +13,17 @@
 		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 	<context:annotation-config />
 
-	<!-- 扫描annotation类，过滤Service，Repository,Controller -->
+	<!-- 扫描annotation类-->
 	<context:component-scan base-package="hct.restaurant">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	<!-- Hibernate连接配置 -->
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>classpath:jdbc.properties</value>
-		</property>
-	</bean>
-	<!-- Hibernate连接配置 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}"></property>
-		<property name="url" value="${jdbc.url}"></property>
-		<property name="username" value="${jdbc.username}"></property>
-		<property name="password" value="${jdbc.password}"></property>
-	</bean>
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="hibernateProperties">
-			<props>
-				<!--<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop> -->
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.show_sql">true</prop><!-- 在控制台显示sql -->
-				<prop key="hibernate.format_sql">true</prop><!-- 格式化sql -->
-			</props>
-		</property>
-		<property name="packagesToScan" value="hct.restaurant.vo" />
+            <property name="configLocation">  
+                             <value>classpath:hibernate.cfg.xml</value>  
+            </property>  
 	</bean>
-	<!-- 以下列表写入实体类 -->  
-	
 	<!-- 不破坏数据库,注册SessionFactory -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>

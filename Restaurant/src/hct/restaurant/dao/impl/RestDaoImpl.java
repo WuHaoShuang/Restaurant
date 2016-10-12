@@ -10,11 +10,12 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 @Repository
 public class RestDaoImpl implements RestDao {
-	Configuration config = new Configuration().configure();
-	SessionFactory sessionFactory = config.buildSessionFactory();
+	@Autowired
+	SessionFactory sessionFactory ;
 	Session session = null;
 	public String add(Restaurant r) {
 		// TODO Auto-generated method stub
@@ -32,7 +33,7 @@ public class RestDaoImpl implements RestDao {
 		ArrayList<Restaurant> list  = new ArrayList<Restaurant>() ;
 		session = sessionFactory.openSession();
 		StringBuffer sb = new StringBuffer();
-		sb.append("From Restaurant where 1=1");
+		sb.append("From Restaurant where 1=1 ");
 		//循环添加查询条件
 		Iterator it = map.keySet().iterator();
 		while(it.hasNext()){

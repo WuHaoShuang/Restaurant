@@ -5,13 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
 public class Restaurant {
 
 	private String id;
 	private String name;
 	private String password;
-
 	@Id
 	public String getId() {
 		return id;

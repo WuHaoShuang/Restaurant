@@ -10,11 +10,12 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 @Repository
 public class BillDaoImpl implements BillDao {
-	Configuration config = new Configuration().configure();
-	SessionFactory sessionFactory = config.buildSessionFactory();
+	@Autowired
+	SessionFactory sessionFactory ;
 	Session session = null;
 	public void add(Bill b) {
 		// TODO Auto-generated method stub
@@ -39,7 +40,7 @@ public class BillDaoImpl implements BillDao {
 		ArrayList<Bill> list  = new ArrayList<Bill>() ;
 		session = sessionFactory.openSession();
 		StringBuffer sb = new StringBuffer();
-		sb.append("From Bill where 1=1");
+		sb.append("From Bill where 1=1 ");
 		Iterator it = map.keySet().iterator();
 		while(it.hasNext()){
 		String key = (String) it.next();
