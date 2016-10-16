@@ -19,7 +19,7 @@ public class BillDaoImpl implements BillDao {
 	Session session = null;
 	public void add(Bill b) {
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();			
+		session = sessionFactory.getCurrentSession();			
 		try {
 			session.save(b);
 			session.beginTransaction().commit();
@@ -38,7 +38,7 @@ public class BillDaoImpl implements BillDao {
 	public ArrayList<Bill> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		ArrayList<Bill> list  = new ArrayList<Bill>() ;
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Bill where 1=1 ");
 		Iterator it = map.keySet().iterator();

@@ -20,7 +20,7 @@ public class ClassifyDaoImpl implements ClassifyDao {
 	public String add(Classify c) {
 		// TODO Auto-generated method stub
 		String id = "";
-		session = sessionFactory.openSession();			
+		session = sessionFactory.getCurrentSession();			
 		try {
 			id = (String) session.save(c);
 			session.beginTransaction().commit();
@@ -40,7 +40,7 @@ public class ClassifyDaoImpl implements ClassifyDao {
 	public ArrayList<Classify> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		ArrayList<Classify> list  = new ArrayList<Classify>() ;
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Classify where 1=1");
 		//循环添加查询条件

@@ -20,7 +20,7 @@ public class TableDaoImpl implements TableDao {
 	public String add(Table t) {
 		// TODO Auto-generated method stub
 		String id = "";
-		session = sessionFactory.openSession();			
+		session = sessionFactory.getCurrentSession();			
 		try {
 			id = (String) session.save(t);
 			session.beginTransaction().commit();
@@ -33,7 +33,7 @@ public class TableDaoImpl implements TableDao {
 
 	public String delete(Table t) {
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();			
+		session = sessionFactory.getCurrentSession();			
 		try {
 			session.delete(t);
 			session.beginTransaction().commit();
@@ -49,7 +49,7 @@ public class TableDaoImpl implements TableDao {
 	public ArrayList<Table> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		ArrayList<Table> list  = new ArrayList<Table>() ;
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Table where 1=1");
 		//循环添加查询条件
@@ -76,7 +76,7 @@ public class TableDaoImpl implements TableDao {
 
 	public void update(Table t) {
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		try {
 			session.update(t);
 			session.beginTransaction().commit();

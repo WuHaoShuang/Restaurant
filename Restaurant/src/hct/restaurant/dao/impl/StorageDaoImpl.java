@@ -20,7 +20,7 @@ public class StorageDaoImpl implements StorageDao {
 	public String add(Storage s) {
 		// TODO Auto-generated method stub
 		String id = "" ;
-		session = sessionFactory.openSession();			
+		session = sessionFactory.getCurrentSession();			
 		try {
 			id = (String) session.save(s);
 			session.beginTransaction().commit();
@@ -40,7 +40,7 @@ public class StorageDaoImpl implements StorageDao {
 	public ArrayList<Storage> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		ArrayList<Storage> list  = new ArrayList<Storage>() ;
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Storage where 1=1");
 		//循环添加查询条件

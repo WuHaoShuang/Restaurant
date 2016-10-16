@@ -1,16 +1,18 @@
 package hct.restaurant.service.impl;
 
+import hct.restaurant.dao.ClassifyDao;
+import hct.restaurant.service.ClassifyService;
+import hct.restaurant.vo.Classify;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import hct.restaurant.dao.ClassifyDao;
-import hct.restaurant.service.ClassifyService;
-import hct.restaurant.vo.Classify;
+import org.springframework.transaction.annotation.Transactional;
 @Service
+@Transactional
 public class ClassifyServiceImpl implements ClassifyService {
 @Autowired
 private ClassifyDao cdao ;

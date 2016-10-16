@@ -13,12 +13,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import antlr.collections.List;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.uwantsoft.goeasy.client.goeasyclient.GoEasy;
 @Service
+@Transactional
 public class TableServiceImpl implements TableService {
 @Autowired
 private TableDao dao;

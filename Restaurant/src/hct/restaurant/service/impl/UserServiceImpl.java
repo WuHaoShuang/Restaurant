@@ -1,15 +1,17 @@
 package hct.restaurant.service.impl;
 
+import hct.restaurant.dao.RestDao;
+import hct.restaurant.service.UserService;
+import hct.restaurant.vo.Restaurant;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import hct.restaurant.dao.RestDao;
-import hct.restaurant.service.UserService;
-import hct.restaurant.vo.Restaurant;
+import org.springframework.transaction.annotation.Transactional;
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 @Autowired
 private RestDao dao ;

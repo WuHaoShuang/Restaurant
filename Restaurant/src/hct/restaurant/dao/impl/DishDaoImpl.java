@@ -25,7 +25,7 @@ public class DishDaoImpl implements DishDao {
 	public String add(Dish d) {
 		// TODO Auto-generated method stub
 		String id = "";
-		session = sessionFactory.openSession();			
+		session = sessionFactory.getCurrentSession();			
 		try {
 			id = (String) session.save(d);
 			session.beginTransaction().commit();
@@ -38,7 +38,7 @@ public class DishDaoImpl implements DishDao {
 
 	public String delete(Dish d) {
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();			
+		session = sessionFactory.getCurrentSession();			
 		try {
 			session.delete(d);
 			session.beginTransaction().commit();
@@ -54,7 +54,7 @@ public class DishDaoImpl implements DishDao {
 	public ArrayList<Dish> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		ArrayList<Dish> list  = new ArrayList<Dish>() ;
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Dish where 1=1");
 		//循环添加查询条件
@@ -81,7 +81,7 @@ public class DishDaoImpl implements DishDao {
 
 	public void update(Dish d) {
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		try {
 			session.update(d);
 			session.beginTransaction().commit();

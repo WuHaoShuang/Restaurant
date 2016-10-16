@@ -19,7 +19,7 @@ public class ProductDaoImpl implements ProductDao{
 	Session session = null;
 	public String add(Product p) {
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();		
+		session = sessionFactory.getCurrentSession();		
 		String id ="";
 		try {
 			id=(String)session.save(p);
@@ -40,7 +40,7 @@ public class ProductDaoImpl implements ProductDao{
 	public ArrayList<Product> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		ArrayList<Product> list  = new ArrayList<Product>() ;
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Product where 1=1");
 		//循环添加查询条件

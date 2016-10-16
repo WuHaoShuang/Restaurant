@@ -31,7 +31,7 @@ public class RestDaoImpl implements RestDao {
 	public ArrayList<Restaurant> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		ArrayList<Restaurant> list  = new ArrayList<Restaurant>() ;
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		StringBuffer sb = new StringBuffer();
 		sb.append("From Restaurant where 1=1 ");
 		//循环添加查询条件
@@ -58,7 +58,7 @@ public class RestDaoImpl implements RestDao {
 	public void update(Restaurant r) 
 	{
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();
+		session = sessionFactory.getCurrentSession();
 		try {
 			session.update(r);
 			session.beginTransaction().commit();
