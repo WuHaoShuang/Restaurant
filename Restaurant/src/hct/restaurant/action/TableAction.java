@@ -87,15 +87,11 @@ public void setTotal(float total) {
 	@Action(value="order",results={@Result(name="success",type="json",params={"root","message"})})
 	public String order()
 	{
-		if(bs.validate(table.getCart(), total, table.getRestname()))
-		{
-			table.setId(ActionContext.getContext().getSession().get("tableid").toString());
+
+			
 			ts.addCart(table);
 			message = "下单成功";
-		}
-		else {
-			message = "价格出错";
-		}
+
 		return "success";
 	}
 	@Action(value="alltable",results={@Result(name="success",type="json",params={"root","list"})})
@@ -107,6 +103,9 @@ public void setTotal(float total) {
 	@Action(value="selectTable",results={@Result(name="success",type="json",params={"root","list"})})
 	public String selectTable()
 	{
+		if (table.getId()==null) {
+			table.setId(ActionContext.getContext().getSession().get("tableid").toString());
+		}
 		list = ts.selectTable(table.getId());
 		return "success";
 	}

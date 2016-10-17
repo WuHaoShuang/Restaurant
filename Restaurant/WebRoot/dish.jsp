@@ -28,6 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
           <script type="text/javascript" src="/Restaurant/js/jquery.validate.min.js"></script>
+    <script src="layer_mobile/layer.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         <script src="js/gbk.js"></script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Flappy World</title>
+
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+
+  <div id="canvasContainer"></div>
+  <span id="textInputSpan" style="display: none">
+  Your name (max 8 chars) :
+  <input id="textInput" value="Hi" maxlength="10" type="text" width="150" />
+  <button id="changeText" onclick="changeText()">GO!</button>
+</span>
+<div style="text-align:center;clear:both">
+  <div id="table" style="display: none">
+    <table style="font-size: x-large">
+      <thead>
+      <tr>
+        <th style="width: 25%">名字</th>
+        <th style="width: 25%">分数</th>
+        <th style="width: 40%">时间</th>
+      </tr>
+      </thead>
+      <tbody id="tbody">
+      </tbody>
+    </table>
+  </div>
+</div>
+  <script type="text/javascript" src="/Restaurant/js/jquery-1.11.0.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="layer_mobile/layer.js"></script>
+  <script src="js/flappy.js"></script>
+
+</body>
+
+</html>

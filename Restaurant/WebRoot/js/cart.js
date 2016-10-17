@@ -5,8 +5,6 @@ var dish_json = {};
 var cart_json = {};
 var add_json = {}
 var total = 0;
-var restname = $("#restname").val();
-var tableid = $("#tableid").val();
 $(function () {
        is_wechat();
         //绑定新加菜品点击事件，生成页面
@@ -103,8 +101,19 @@ $(function () {
                     url: "/Restaurant/order",
                     dataType: 'json',
                     success: function (data) {
-                        alert(data);
-                        window.location.reload();
+                        console.log(data);
+                        layer.open({
+                            title: '下单成功'
+                            , content: "要玩会儿小游戏吗？"
+                            , btn: ['确定', '不要了']
+                            ,shadeClose:false
+                            , yes: function (index) {
+                                window.location.href="/Restaurant/flappy.html"
+                            },no:function()
+                            {
+                                window.location.reload();
+                            }
+                        })
                     }
                 })
             })
@@ -117,7 +126,6 @@ $(function () {
             $(".right,.classify_1").not(this).removeClass("classify_1");
             $.ajax
             ({
-                data: {"id": tableid},
                 type: 'post',
                 url: "/Restaurant/selectTable",
                 dataType: 'json',

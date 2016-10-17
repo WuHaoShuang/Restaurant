@@ -15,5 +15,6 @@
         <mapping class="hct.restaurant.vo.Restaurant"/>
         <mapping class="hct.restaurant.vo.Product"/>
         <mapping class="hct.restaurant.vo.Storage"/>
+        <mapping class="hct.restaurant.vo.GameScore" />
     </session-factory>
 </hibernate-configuration>
