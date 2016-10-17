@@ -44,7 +44,6 @@ public class TableDaoImpl implements TableDao {
 		}
 		return "success";
 	}
-
 	@SuppressWarnings("unchecked")
 	public ArrayList<Table> select(Map<String, String> map) {
 		// TODO Auto-generated method stub
@@ -73,7 +72,6 @@ public class TableDaoImpl implements TableDao {
 		}
 		return list;
 	}
-
 	public void update(Table t) {
 		// TODO Auto-generated method stub
 		session = sessionFactory.getCurrentSession();
@@ -82,8 +80,7 @@ public class TableDaoImpl implements TableDao {
 			session.beginTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-		
+		}		
 	}
 
 }

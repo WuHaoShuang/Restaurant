@@ -31,7 +31,7 @@ public class DishDaoImpl implements DishDao {
 			session.beginTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println(e);
+			e.printStackTrace();
 		}
 		return id ;
 	}
@@ -67,6 +67,7 @@ public class DishDaoImpl implements DishDao {
 			sb.append("and "+key+" ='"+value+"' ");
 		}
 		}
+
 		try
 		{
 			list = (ArrayList<Dish>) session.createQuery(sb.toString()).list();

@@ -28,6 +28,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <script type="text/javascript" src="/Restaurant/layer/layer.js"></script>
         <script type="text/javascript" src="/Restaurant/js/main.js"></script>
             <script type="text/javascript" src="/Restaurant/js/jquery.qrcode.min.js"></script>
+            <script type="text/javascript" src="/Restaurant/UE/ueditor.config.js"></script>
+            <script type="text/javascript" src="/Restaurant/UE/ueditor.all.min.js"></script>
             </head>
         <body>
         <div id="body-wrapper">

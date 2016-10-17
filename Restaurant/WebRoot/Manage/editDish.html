@@ -27,14 +27,29 @@
         </select>
     </p>
     <p id="pic">
-        <label>菜品展示图片</label>
-        <input type="file" id="pictureAjax" name="img"/>
-        <img id="picImg" src=""/><br>
+    <textarea id="img" name="img"></textarea>
     </p>
     <input class="button" type="submit" value="修改菜品"/>
     <input class="button" type="button" value="删除菜品" id="del_btn"/>
 </form>
 <script>
+	if(editor!=null) UE.getEditor("img").destroy();
+	 editor = UE.getEditor('img',{
+        //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+        //focus时自动清空初始化时的内容
+     toolbars:[['simpleupload']],
+        autoClearinitialContent:false,
+        //关闭字数统计
+        wordCount:false,
+        maximumWords:1,
+        //关闭elementPath
+        elementPathEnabled:false,
+        //默认的编辑区域高度
+        initialFrameWidth:500,
+        initialFrameHeight:300,
+        //更多其他参数，请参考ueditor.config.js中的配置项
+        //serverUrl: '/server/ueditor/controller.php'
+    })
     $.ajax
     ({
         type: 'post',
@@ -86,24 +101,11 @@
                     $("#name").val(data[o].name);
                     $("#class_sel").val(data[o].classname);
                     $("#price").val(data[o].price);
-                    $("#picImg").attr({"src": data[o].img, "style": "height:140px;width:200px"});
+
                 }
             }
         })
     })
-    var filename = "";
-    var picString = "";
-    $("#pictureAjax").change(function (e) {
-        var file = e.delegateTarget.files[0];
-        filename = file.name;
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function (ret) {
-            picString = reader.result
-            //预览图片
-            $("#picImg").attr({"src": picString, "style": "height:140px;width:200px"});
-        }
-    });
 
     $("#edit_dish").validate(
             {
@@ -111,7 +113,7 @@
                 submitHandler: function (form) {
                     // do other stuff for a valid form
                     var params = $("#edit_dish").serialize();
-                    params += "&&file=" + picString + "&&filename=" + filename;
+                    params += "&&file=" +editor.getContent();
                     var url = '/Restaurant/dish/editdish';
                     jQuery.ajax({
                         type: 'post',
@@ -133,6 +135,8 @@
                         range: [0, 1000],
                         required: true,
                     }, classname: {
+                        required: true,
+                    },img:{
                         required: true,
                     }
                 }, onfocusout: false,

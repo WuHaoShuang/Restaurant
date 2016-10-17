@@ -8,7 +8,7 @@ var total = 0;
 var restname = $("#restname").val();
 var tableid = $("#tableid").val();
 $(function () {
-        is_wechat();
+       is_wechat();
         //绑定新加菜品点击事件，生成页面
         $(".add_page").bind("click", function () {
             $(".right").hide();

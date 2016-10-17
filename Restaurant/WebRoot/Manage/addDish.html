@@ -1,13 +1,13 @@
 <form id="adddish_form">
 <p>
     <label>菜品名称</label>
-    <input class="text-input small-input" type="text"  name="name">
+    <input class="text-input small-input" type="text"  name="name" id="dish_name">
     <!-- Classes for input-notification: success, error, information, attention -->
     <br> </p>
     <p>
     <p>
         <label>菜品价格</label>
-        <input class="text-input small-input" type="text"  name="price">
+        <input class="text-input small-input" type="text"  name="price" id="price">
         <!-- Classes for input-notification: success, error, information, attention -->
         <br>
     <p>
@@ -16,26 +16,28 @@
         </select>
     </p>
     <p id="pic">
-        <label>菜品展示图片</label>
-        <input type="file" id="pictureAjax" name="img"/>
-        <img id="picImg" src="" /><br>
+       <textarea id="img" name="img"></textarea>
     </p>
-<input class="button" type="submit" value="添加菜品"/>
+<input class="button" type="submit" value="添加菜品" />
 </form>
 <script>
-    var filename = "";
-    var picString = "";
-    $("#pictureAjax").change(function (e) {
-        var file = e.delegateTarget.files[0];
-        filename = file.name;
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function (ret) {
-            picString = reader.result
-            //预览图片
-            $("#picImg").attr({ "src": picString, "style": "height:140px;width:200px" });
-        }
-    });
+if(editor!=null) UE.getEditor("img").destroy();
+editor = UE.getEditor('img',{
+    //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+    //focus时自动清空初始化时的内容
+ toolbars:[['simpleupload']],
+    autoClearinitialContent:false,
+    //关闭字数统计
+    wordCount:false,
+    maximumWords:1,
+    //关闭elementPath
+    elementPathEnabled:false,
+    //默认的编辑区域高度
+    initialFrameWidth:500,
+    initialFrameHeight:300,
+    //更多其他参数，请参考ueditor.config.js中的配置项
+    //serverUrl: '/server/ueditor/controller.php'
+})
     $.ajax
     ({
         type: 'post',
@@ -59,7 +61,7 @@
                 submitHandler: function (form) {
                     // do other stuff for a valid form
                     var params = $("#adddish_form").serialize();
-                    params += "&&file=" + picString + "&&filename=" + filename;
+                    params += "&&file=" + editor.getContent();
                     var url = '/Restaurant/dish/adddish';
                     jQuery.ajax({
                         type: 'post',
@@ -84,7 +86,6 @@
                         required: true,
                     },img:{
                         required: true,
-                        checkPic:true,
                     }
                 }, onfocusout: false,
                 ignore: ""

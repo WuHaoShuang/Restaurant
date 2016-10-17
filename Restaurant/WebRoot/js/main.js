@@ -14,6 +14,20 @@ function is_wechat(){
         window.location.href="/Restaurant/error.html";
     }
 }
+function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+        "SymbianOS", "Windows Phone",
+        "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
 function s$(id) {
     var shade = $("<div id='shade_'+id></div>");
     shade.css({
@@ -61,19 +75,4 @@ return shade;
     });
 
 }));
-jQuery.validator.addMethod("price", function(value, element) {
-    return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/.test(value);
-}, "请输入合适的价格");
-jQuery.validator.addMethod("checkPic", function(value, element) {
-    var filepath=$("#pictureAjax").val();
-    //获得上传文件名
-    var fileArr=filepath.split("\\");
-    var fileTArr=fileArr[fileArr.length-1].toLowerCase().split(".");
-    var filetype=fileTArr[fileTArr.length-1];
-    //切割出后缀文件名
-    if(filetype != "png"){
-        return false;
-    }else{
-        return true;
-    }
-}, "上传图片格式不适合");
+var editor ;

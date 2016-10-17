@@ -2,7 +2,7 @@
  * Created by HiCat on 2016/8/1.
  */
 $(function () {
-    is_wechat();
+    if(IsPC()) alert("为了更好的体验,请使用手机打开");
     var goEasy = new GoEasy({
         appkey: '45ec7ca2-d450-4411-bfbd-8e6ee9ea6ac3'
     });
